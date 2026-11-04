@@ -56,4 +56,6 @@ Os prints registram uma execução dos dois módulos e tarefas com título, conc
 
 Após executar, confira no terminal as respostas de GET, POST e PUT e a mensagem de envio ao Make. No histórico do cenário, verifique se os dois módulos concluíram a execução e se um novo registro contém o título enviado, `concluida` igual a `false` e a data do envio. A mensagem de sucesso HTTP, sozinha, não comprova o registro no segundo módulo.
 
-As três melhorias apresentadas nas respostas são propostas de revisão; não foram aplicadas integralmente ao programa. O código já verifica `resposta.ok` nas requisições. Foram feitas verificações locais com respostas simuladas; a versão com URL configurada pelo terminal ainda precisa de um novo teste real de ponta a ponta.
+**Teste real de ponta a ponta concluído em 04/11/2026:** a versão publicada, com `MAKE_WEBHOOK_URL` configurada no terminal, executou GET, POST, envio ao webhook e PUT. O novo registro foi confirmado diretamente no Data store após atualizar a página, com os três campos esperados preenchidos.
+
+As três melhorias apresentadas nas respostas são propostas de revisão; não foram aplicadas integralmente ao programa. O código já verifica `resposta.ok` nas requisições.

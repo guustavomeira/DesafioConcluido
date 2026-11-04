@@ -5,9 +5,8 @@ Consulta, criação e atualização de tarefas em JavaScript, com envio da taref
 ## Arquivos
 
 ```text
-desafio1.js                    Programa principal
-docs/Resposta - Desafio.docx   Respostas e melhorias propostas
-evidencias/                   Prints do cenário e dos registros no Make
+desafio1.js   Programa principal
+evidencias/  Prints do cenário e dos registros no Make
 ```
 
 ## Como executar no Windows
@@ -42,7 +41,8 @@ O cenário usa **Custom webhook → Data store / Add/replace a record**. O segun
 
 ## Respostas e evidências
 
-- [Respostas do desafio](docs/Resposta%20-%20Desafio.docx): explicação do código, três melhorias propostas e diferença entre API e webhook.
+As respostas escritas (explicação do código, três melhorias propostas e diferença entre API e webhook) são entregues diretamente ao recrutador, em documento separado.
+
 - [Cenário com os dois módulos](evidencias/01-cenario-make.jpg).
 - [Resultado no Data store](evidencias/02-resultado-make.jpg).
 
@@ -50,6 +50,10 @@ O cenário usa **Custom webhook → Data store / Add/replace a record**. O segun
 
 ![Registros no Data store](evidencias/02-resultado-make.jpg)
 
-Os prints fornecidos registram uma execução dos dois módulos e tarefas com título, conclusão e data. Também aparecem registros vazios de outros testes. A reorganização do repositório não representa um novo teste ao vivo da integração.
+Os prints registram uma execução dos dois módulos e tarefas com título, conclusão e data. Também aparecem registros vazios de outros testes.
 
-As três melhorias descritas no Word são propostas de revisão; não foram aplicadas integralmente ao programa. O código já verifica `resposta.ok` nas requisições. Uma mensagem de envio HTTP bem-sucedido deve ser conferida junto ao resultado da ação no Make.
+## Como conferir o resultado
+
+Após executar, confira no terminal as respostas de GET, POST e PUT e a mensagem de envio ao Make. No histórico do cenário, verifique se os dois módulos concluíram a execução e se um novo registro contém o título enviado, `concluida` igual a `false` e a data do envio. A mensagem de sucesso HTTP, sozinha, não comprova o registro no segundo módulo.
+
+As três melhorias apresentadas nas respostas são propostas de revisão; não foram aplicadas integralmente ao programa. O código já verifica `resposta.ok` nas requisições. Foram feitas verificações locais com respostas simuladas; a versão com URL configurada pelo terminal ainda precisa de um novo teste real de ponta a ponta.

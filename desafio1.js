@@ -51,6 +51,41 @@ async function criarTarefa() {
     }
 }
 
+// Envia os dados de uma tarefa para o webhook do Make (POST)
+async function avisarMake(tarefa) {
+    const WEBHOOK_URL = process.env.MAKE_WEBHOOK_URL;
+
+    try {
+        if (!WEBHOOK_URL) {
+            throw new Error('Configure MAKE_WEBHOOK_URL no terminal antes de executar.');
+        }
+
+        const dados = {
+            titulo: tarefa.title,
+            concluida: tarefa.completed,
+            criadaEm: new Date().toISOString()
+        };
+
+        const resposta = await fetch(WEBHOOK_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dados)
+        });
+
+        if (!resposta.ok) {
+            throw new Error(`Erro HTTP: ${resposta.status}`);
+        }
+
+        console.log('Tarefa enviada ao Make com sucesso.');
+        return true;
+    } catch (erro) {
+        console.error('Falha ao avisar o Make:', erro.message);
+        return false;
+    }
+}
+
 // Função para atualizar uma tarefa existente (PUT)
 async function atualizarTarefa(id) {
     try {
@@ -87,7 +122,10 @@ async function executarPrograma() {
     console.log('--- INÍCIO DO PROGRAMA ---');
     
     await obterTarefas();
-    await criarTarefa();
+    const tarefaCriada = await criarTarefa();
+    if (tarefaCriada) {
+        await avisarMake(tarefaCriada);
+    }
     await atualizarTarefa(1);
     
     console.log('--- FIM DO PROGRAMA ---');
